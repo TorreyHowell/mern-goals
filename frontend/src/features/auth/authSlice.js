@@ -1,8 +1,7 @@
-/* eslint-disable no-mixed-operators */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
 
-// Get user from local storage
+// Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'))
 
 const initialState = {
@@ -32,7 +31,6 @@ export const register = createAsyncThunk(
 )
 
 // Login user
-// Register user
 export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   try {
     return await authService.login(user)
@@ -45,7 +43,6 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   }
 })
 
-// Logout user
 export const logout = createAsyncThunk('auth/logout', async () => {
   await authService.logout()
 })
@@ -56,8 +53,8 @@ export const authSlice = createSlice({
   reducers: {
     reset: (state) => {
       state.isLoading = false
-      state.isError = false
       state.isSuccess = false
+      state.isError = false
       state.message = ''
     },
   },
@@ -77,9 +74,6 @@ export const authSlice = createSlice({
         state.message = action.payload
         state.user = null
       })
-      .addCase(logout.fulfilled, (state) => {
-        state.user = null
-      })
       .addCase(login.pending, (state) => {
         state.isLoading = true
       })
@@ -92,6 +86,9 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload
+        state.user = null
+      })
+      .addCase(logout.fulfilled, (state) => {
         state.user = null
       })
   },

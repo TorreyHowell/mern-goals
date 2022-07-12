@@ -28,9 +28,8 @@ const getGoals = async (token) => {
   return response.data
 }
 
-// Delete use goal
+// Delete user goal
 const deleteGoal = async (goalId, token) => {
-  console.log('a;sldjfl;asfdj')
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,

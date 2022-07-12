@@ -30,7 +30,7 @@ function Login() {
       navigate('/')
     }
 
-    dispatch(reset)
+    dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e) => {
@@ -42,6 +42,7 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault()
+
     const userData = {
       email,
       password,
@@ -49,46 +50,48 @@ function Login() {
 
     dispatch(login(userData))
   }
+
   if (isLoading) {
     return <Spinner />
   }
+
   return (
     <>
-      <section className="heading">
+      <section className='heading'>
         <h1>
           <FaSignInAlt /> Login
         </h1>
         <p>Login and start setting goals</p>
       </section>
 
-      <section className="form">
+      <section className='form'>
         <form onSubmit={onSubmit}>
-          <div className="form-group">
+          <div className='form-group'>
             <input
-              id="email"
+              type='email'
+              className='form-control'
+              id='email'
+              name='email'
               value={email}
-              type="email"
-              name="email"
-              className="form-control"
-              placeholder="Enter your email"
+              placeholder='Enter your email'
               onChange={onChange}
             />
           </div>
-          <div className="form-group">
+          <div className='form-group'>
             <input
-              id="password"
+              type='password'
+              className='form-control'
+              id='password'
+              name='password'
               value={password}
-              type="password"
-              name="password"
-              className="form-control"
-              placeholder="Enter password"
+              placeholder='Enter password'
               onChange={onChange}
             />
           </div>
 
-          <div className="form-group">
-            <button type="submit" className="btn btn-block">
-              Login
+          <div className='form-group'>
+            <button type='submit' className='btn btn-block'>
+              Submit
             </button>
           </div>
         </form>
